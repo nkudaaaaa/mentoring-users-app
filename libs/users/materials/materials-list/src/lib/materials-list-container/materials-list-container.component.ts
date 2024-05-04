@@ -35,7 +35,8 @@ export class MaterialsListContainerComponent {
     this.dialog.open(MaterialsContentComponent, { data });
   }
 
-  onAddMaterial(newMaterial: Omit<CreateMaterial, 'folder_id'>): void {
-    this.materialsFacade.addMaterial(newMaterial);
+  onAddMaterial(newMaterial: unknown): void {
+    if(newMaterial instanceof Object && !('folder_id' in newMaterial))
+      this.materialsFacade.addMaterial(newMaterial as Omit<MaterialDTO, 'folder_id'>);
   }
 }

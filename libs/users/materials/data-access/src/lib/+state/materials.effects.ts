@@ -155,7 +155,7 @@ export const deleteMaterial = createEffect(
 export const addMaterial = createEffect(
   () => {
     const actions$ = inject(Actions);
-    const apiService = inject(ApiService);
+    const apiService = inject(ApiService)
 
     return actions$.pipe(
       ofType(MaterialsActions.addMaterial),

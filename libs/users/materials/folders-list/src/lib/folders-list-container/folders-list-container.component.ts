@@ -8,6 +8,9 @@ import { LetDirective } from '@ngrx/component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddButtonComponent } from '@users/materials/shared';
 import { FoldersAddDialogComponent } from '@users/materials/folders-create';
+import { HttpClient } from '@angular/common/http';
+import { first, tap } from 'rxjs';
+import { logging } from '@angular-devkit/core';
 
 @Component({
   selector: 'users-folders-list-container',
@@ -22,6 +25,7 @@ export class FoldersListContainerComponent {
   private readonly router = inject(Router);
   private readonly activatedRoute = inject(ActivatedRoute);
   public readonly FoldersAddDialogComponent = FoldersAddDialogComponent;
+  private readonly http = inject(HttpClient);
 
   constructor() {
     this.facade.loadFolders();
@@ -36,7 +40,8 @@ export class FoldersListContainerComponent {
     this.router.navigate([id], { relativeTo: this.activatedRoute});
   }
 
-  onAddFolder(title: string): void {
+  onAddFolder(title: unknown): void {
+    if(typeof(title) === 'string')
     this.facade.addFolder({ title });
   }
 }

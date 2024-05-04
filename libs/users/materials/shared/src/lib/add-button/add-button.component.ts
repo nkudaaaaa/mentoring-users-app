@@ -30,7 +30,7 @@ export class AddButtonComponent<T> {
 
   @Input({ required: true }) dialogComponent!: Type<T>;
   @Input() menuItems?: string[];
-  @Output() afterClosed = new EventEmitter<any>();
+  @Output() afterClosed = new EventEmitter<unknown>();
 
   openAddDialog(type?: string): void {
     const dialogRef: MatDialogRef<T> = this.dialog.open(this.dialogComponent, {
